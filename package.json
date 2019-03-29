@@ -1,0 +1,28 @@
+{
+  "name": "login-app",
+  "version": "1.0.0",
+  "description": "This is an authentication application.",
+  "main": "authentication.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amitykaran/login-app.git"
+  },
+  "keywords": [
+    "login",
+    "signup",
+    "authentication"
+  ],
+  "author": "Amit yadav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amitykaran/login-app/issues"
+  },
+  "homepage": "https://github.com/amitykaran/login-app#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}
