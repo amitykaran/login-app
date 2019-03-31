@@ -5,7 +5,7 @@ router.get('/login', (req, res) => {
     res.status(200).send('<h1>Login Router Called</h1>');
 });
 
-app.post('/login', (req, res) => {
+router.post('/login', (req, res) => {
     console.log(req.body);
     res.send(`<h1>This is login API</h1>`);
 });
