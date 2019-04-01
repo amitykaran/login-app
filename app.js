@@ -5,6 +5,8 @@ const cors = require('cors');
 const session = require('express-session');
 const errorHandler = require('errorhandler');
 const mongoose = require('mongoose');
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 
 const login = require('./routes/login');
 const profile = require('./routes/profile');
@@ -77,7 +79,7 @@ app.use((err, req, res) => {
 // });
 
 app.get('/login', (req, res) => {
-    res.send(`<h1>This is login API</h1>`)
+    res.send(`<h1>This is login API</h1>`);
 });
 
 
