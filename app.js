@@ -11,6 +11,7 @@ const jwt = require('jsonwebtoken');
 const login = require('./routes/login');
 const profile = require('./routes/profile');
 const users = require('./models/users');
+const passport = require('./config/passport');
 
 const app = express();
 const PORT = 3000;
@@ -22,6 +23,7 @@ const corsOptions = {
 mongoose.promise = global.Promise;
 const isProduction = process.env.NODE_ENV === 'production';
 
+app.use(require('./routes'));
 app.use(cors(corsOptions));
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
