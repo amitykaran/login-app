@@ -44,18 +44,25 @@ if(!isProduction) {
 //     next();
 // });
 
-app.use('/', login);
-app.use('/', profile);
+// app.use('/', login);
+// app.use('/', profile);
 
 //Configure Mongoose
-mongoose.connect('mongodb://localhost/passport-tutorial');
+mongoose.connect('mongodb://localhost:27017/passport-tutorial');
 mongoose.set('debug', true);
+
+const db = mongoose.connection;
+
+db.on('error', (err) => {console.log('connection Error:', err);})
+
+db.once('open', () => {
+  console.log('mongodb connected');
+});
 
 //Error handlers & middlewares
 if(!isProduction) {
   app.use((err, req, res) => {
     res.status(err.status || 500);
-
     res.json({
       errors: {
         message: err.message,
