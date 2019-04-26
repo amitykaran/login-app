@@ -7,6 +7,8 @@ const app = express();
 const PORT = 8000;
 
 const user = require('./controller/user');
+const login = require('./controller/login');
+
 
 mongoose.connect('mongodb://localhost:27017/personalprojects', {useNewUrlParser: true});
 
@@ -25,6 +27,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', user);
+app.use('/', login);
+
 
 app.listen(PORT, () => {
     console.log('server is running on port', PORT);

@@ -3,7 +3,7 @@ const _ = require('lodash');
 
 
 const router = express.Router() ;
-const userModel = require('../models/signup');
+const userModel = require('../models/user');
 
 
 router.post('/add-user', (req, res) => {
@@ -27,6 +27,27 @@ router.post('/add-user', (req, res) => {
         console.log('User NOT found');
     }
     res.send('this is response from add-user');
+});
+
+router.get('/user-list', (req, res) => {
+    let model = {};
+    userModel.find((err, list) => {
+        if(err){
+            console.log('No user found');
+            res.json({
+                status: 'err',
+                error: err
+            });
+        } else {
+            console.log('Here is the list of users', list);
+            model.list = list;
+            res.json({
+                status: 'success',
+                list: list
+            });
+        }
+    });
+
 });
 
 module.exports = router;
