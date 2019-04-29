@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/amitykaran/login-app#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
