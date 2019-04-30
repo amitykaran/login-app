@@ -11,27 +11,43 @@ router.post('/login', (req, res) => {
         user = req.body.user;
     }
     if(!_.isEmpty(user)){
-        userModel.find({email: user.email})
+        userModel.findOne({email: user.email})
         .exec((err, obj) => {
             if(err){
                 console.log(err);
                 res.send(`Error ${err}`);
             } else{
-                console.log('User found', obj);
-                if(bcrypt.compare(user.password, obj.password)){
-                    console.log('Congratulation! you are successfully loggedIn');
-                    res.json({
-                        status: 'success',
-                        result : 'You are logged in successfully'
-                    })
+                if(!_.isEmpty(obj)){
+                    console.log('User found', obj);
+                if(user.password && obj.password){
+                    bcrypt.compare(user.password, obj.password, (error, auth) => {
+                        if(auth){
+                            console.log('Congratulation! you are successfully loggedIn');
+                            res.json({
+                                status: 'success',
+                                result : 'You are logged in successfully'
+                            })
+                        } else{
+                            console.log('Your password is incorrect, Please try again');
+                            res.status(403).json({
+                                status: 'failed',
+                                error: 'Incorrect password!'
+                            });
+               
+                        }
+                    });
+                  
                 } else {
-                    console.log('Your password is incorrect, Please try again');
-                    res.status(403).send();
-                }
+                    console.log('Please provide a valid password');
+                     }
                 // res.json({
                 //     status: 'success',
                 //     user: obj
                 // })
+                } else{
+                    console.log('User Not found');
+                    res.send('User Not Found');
+                }
             }
         })
     } else {
